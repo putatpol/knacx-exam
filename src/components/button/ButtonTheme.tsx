@@ -10,7 +10,7 @@ const ButtonTheme = () => {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
-    console.log(savedTheme);
+    // console.log(savedTheme);
     setTheme(savedTheme);
     document.documentElement.setAttribute("data-theme", savedTheme);
   }, []);

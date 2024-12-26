@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <main>
       <section>
-        <div>
+        <div className="px-4 md:px-0">
           <ProductListApi />
         </div>
       </section>

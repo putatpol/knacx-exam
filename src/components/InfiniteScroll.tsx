@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import debounce from "lodash.debounce";
 
 type Props = {
   handleLoadmore: () => void;
@@ -8,7 +9,7 @@ type Props = {
 
 const InfiniteScroll = ({ handleLoadmore }: Props) => {
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = debounce(() => {
       const scrollTop = window.scrollY; 
       const windowHeight = window.innerHeight; 
       const documentHeight = document.documentElement.scrollHeight; 
@@ -18,16 +19,15 @@ const InfiniteScroll = ({ handleLoadmore }: Props) => {
         // console.log("end");
         handleLoadmore();
       }
-    };
+    }, 300);
 
     // add event listener
     window.addEventListener("scroll", handleScroll);
-
     // Remove event listener when handleScroll
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  return <div style={{ height: "6vh" }} />;
+  return <div className="h-[6vh]" />;
 };
 
 export default InfiniteScroll;

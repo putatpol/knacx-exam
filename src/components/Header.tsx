@@ -7,8 +7,8 @@ const Header = () => {
       <div>
         <h1>Exam </h1>
       </div>
-      <div className="space-x-5 text-xs text-gray-500">
-        <p>Front-end</p>
+      <div className="space-x-5 text-xs text-gray-500 *:hidden *:sm:flex">
+        <p className="">Front-end</p>
         <span>|</span>
         <p>Putttapol Putthati</p>
       </div>
