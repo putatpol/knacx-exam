@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ProductApi, ProductsApiResponse } from "@/interface/productsApi.dto";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
@@ -15,7 +15,7 @@ const ProductListApi = () => {
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     const itemAmount = 8;
     const url = `https://dummyjson.com/products?limit=${itemAmount}&skip=${skip}`;
     if (!hasMore) return;
@@ -43,7 +43,7 @@ const ProductListApi = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [skip, hasMore]);
 
   useEffect(() => {
     fetchProducts();

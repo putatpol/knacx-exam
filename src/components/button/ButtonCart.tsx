@@ -1,48 +1,56 @@
+"use client";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import ProductCart from "../product/ProductCart";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
-const IconCart = () => {
+type Props = {
+  productsLength: number;
+};
+
+const IconCart = ({ productsLength }: Props) => {
   return (
     <>
       <div className="flex items-center rounded-lg border px-4 py-2 text-sm">
         <div className="mr-1 size-4">
           <FontAwesomeIcon icon={faCartShopping} />
         </div>
-        <span>(0)</span>
+        <span>({productsLength})</span>
       </div>
     </>
   );
 };
 
 const ButtonCart = () => {
+  const products = useSelector((state: RootState) => state.productCart.items);
+
+  const calculatePrice = () => {
+    const total = products.reduce((total, item) => total + item.totalPrice, 0);
+    return total.toFixed(2);
+  };
   return (
     <Menu>
       <MenuButton>
-        <IconCart />
+        <IconCart productsLength={products.length} />
       </MenuButton>
       <MenuItems
         anchor="bottom"
         className="itemCart mt-2 rounded-lg border shadow-md"
       >
         <MenuItem>
-          <ProductCart />
+          <ProductCart products={products} />
         </MenuItem>
-        <MenuItem>
-          <ProductCart />
-        </MenuItem>
-        <MenuItem>
-          <ProductCart />
-        </MenuItem>
-        <div className="py-2 px-5 *:flex *:justify-between *:items-center">
+        <div className="min-w-[20rem] px-5 py-2 *:flex *:items-center *:justify-between">
           <div>
-            <small>จำนวนสินค้า</small>
-            <small>3</small>
+            <small>รายการสินค้า</small>
+            <small>{products.length}</small>
           </div>
           <div>
             <small>ราคารวม</small>
-            <p className="text-rose-500">$ 1000</p>
+            <p className="text-rose-500 font-bold">$ {calculatePrice()}</p>
           </div>
         </div>
       </MenuItems>

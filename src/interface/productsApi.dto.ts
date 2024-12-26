@@ -1,9 +1,13 @@
 export interface ProductApi {
   id: number;
   title: string;
-  description: string;
   price: number;
   images: string[];
+}
+export interface ProductCartType {
+  products: ProductApi;
+  quantity: number;
+  totalPrice: number;
 }
 
 export interface ProductsApiResponse {

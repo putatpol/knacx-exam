@@ -1,6 +1,6 @@
 import ButtonCart from "./button/ButtonCart";
 import ButtonTheme from "./button/ButtonTheme";
-import Link from "next/link";
+
 const Header = () => {
   return (
     <div className="mx-8 flex justify-between border-b p-4 *:flex *:items-center">
