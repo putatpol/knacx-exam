@@ -6,6 +6,7 @@ import { ProductApi, ProductsApiResponse } from "@/interface/productsApi.dto";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import ProductItem from "./ProductItem";
+import InfiniteScroll from "../InfiniteScroll";
 
 const ProductListApi = () => {
   const [dataProduct, setDataProduct] = useState<ProductApi[]>([]);
@@ -52,6 +53,10 @@ const ProductListApi = () => {
   // console.log(dataProduct);
   // console.log(totalProduct);
 
+  const handleLoadmore = () => {
+    fetchProducts();
+  };
+
   return (
     <>
       <div className="flex items-center justify-between">
@@ -64,7 +69,9 @@ const ProductListApi = () => {
         {loading ? (
           <FontAwesomeIcon icon={faSpinner} />
         ) : hasMore ? (
-          <button onClick={fetchProducts}>Load More</button>
+          <>
+            <InfiniteScroll handleLoadmore={handleLoadmore} />
+          </>
         ) : (
           <></>
         )}

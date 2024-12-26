@@ -22,6 +22,9 @@ const ProductItem = ({ dataProduct }: Props) => {
             height={300}
             alt={product.title}
             className="h-60 scale-95 object-contain group-hover:scale-100 ease-in duration-100"
+            onError={(e) => {
+              e.currentTarget.src = "/photo.png";
+            }}
           />
           <p className="line-clamp-1">{product.title}</p>
           <p className="text-sm">$ {product.price}</p>
